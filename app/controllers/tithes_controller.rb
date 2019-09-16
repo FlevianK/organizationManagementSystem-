@@ -1,0 +1,2 @@
+class TithesController < ApplicationController
+end
