@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_09_16_111043) do
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.string "code"
-    t.integer "total_members"
+    t.bigint "total_members"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
