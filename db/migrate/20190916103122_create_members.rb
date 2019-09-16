@@ -7,6 +7,7 @@ class CreateMembers < ActiveRecord::Migration[5.2]
       t.date :join_date
       t.boolean :born_again
       t.boolean :spirit_filled
+      t.text :departments
 
       t.timestamps
     end
