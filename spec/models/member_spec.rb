@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Member, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:leaders).dependent(:destroy) }
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:contacts) }
+  it { should validate_presence_of(:residence) }
+  it { should validate_presence_of(:join_date) }
+  it { should validate_presence_of(:born_again) }
+  it { should validate_presence_of(:spirit_filled) }
+  it { should validate_presence_of(:departments) }
 end

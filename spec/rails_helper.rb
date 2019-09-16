@@ -19,7 +19,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 RSpec.configure do |config|
   config.include RequestSpecHelper, type: :request
   config.include RequestSpecHelper
-  config.include ControllerSpecHelper
+  # config.include ControllerSpecHelper
   # add `FactoryBot` methods
   config.include FactoryBot::Syntax::Methods
 
