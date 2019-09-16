@@ -1,0 +1,2 @@
+class Tithe < ApplicationRecord
+end
