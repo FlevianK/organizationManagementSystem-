@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2019_09_16_111043) do
 
   create_table "members", force: :cascade do |t|
     t.string "name"
-    t.integer "contacts"
+    t.string "contacts"
     t.string "residence"
     t.date "join_date"
     t.boolean "born_again"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2019_09_16_111043) do
 
   create_table "tithes", force: :cascade do |t|
     t.string "name"
-    t.integer "contacts"
+    t.string "contacts"
     t.date "tithe_date"
     t.boolean "member"
     t.integer "amount"

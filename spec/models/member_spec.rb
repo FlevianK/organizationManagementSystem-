@@ -6,7 +6,5 @@ RSpec.describe Member, type: :model do
   it { should validate_presence_of(:contacts) }
   it { should validate_presence_of(:residence) }
   it { should validate_presence_of(:join_date) }
-  it { should validate_presence_of(:born_again) }
-  it { should validate_presence_of(:spirit_filled) }
   it { should validate_presence_of(:departments) }
 end
