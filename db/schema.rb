@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 2019_09_16_111043) do
 
   create_table "services", force: :cascade do |t|
     t.date "service_date"
-    t.integer "total_attendants"
-    t.integer "total_new_coverts"
+    t.bigint "total_attendants"
+    t.bigint "total_new_converts"
     t.text "sunday_school_teachers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

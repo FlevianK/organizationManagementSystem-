@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   end
   resources :departments
   resources :events
+  resources :services
 end
