@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2019_09_16_111043) do
     t.string "contacts"
     t.date "tithe_date"
     t.boolean "member"
-    t.integer "amount"
+    t.bigint "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

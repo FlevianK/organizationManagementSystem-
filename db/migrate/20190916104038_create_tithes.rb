@@ -5,7 +5,7 @@ class CreateTithes < ActiveRecord::Migration[5.2]
       t.string :contacts
       t.date :tithe_date
       t.boolean :member
-      t.integer :amount
+      t.integer :amount, limit: 8
 
       t.timestamps
     end
