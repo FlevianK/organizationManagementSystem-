@@ -28,7 +28,7 @@ class LeadersController < ApplicationController
   private
 
   def leader_params
-    params.permit(:title, :department)
+    params.require(:leader).permit(:title, :department)
   end
 
   def set_member

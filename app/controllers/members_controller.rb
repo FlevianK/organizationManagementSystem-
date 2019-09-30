@@ -28,7 +28,7 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.permit(:name, :contacts, :residence, :join_date, :born_again, :spirit_filled, :departments)
+    params.require(:member).permit(:name, :contacts, :residence, :join_date, :born_again, :spirit_filled, :departments)
   end
 
   def set_member

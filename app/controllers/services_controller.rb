@@ -28,7 +28,7 @@ class ServicesController < ApplicationController
   private
 
   def service_params
-    params.permit(:service_date, :total_new_converts, :total_attendants, :sunday_school_teachers)
+    params.require(:service).permit(:service_date, :total_new_converts, :total_attendants, :sunday_school_teachers)
   end
 
   def set_service

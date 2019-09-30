@@ -28,7 +28,7 @@ class DepartmentsController < ApplicationController
   private
 
   def department_params
-    params.permit(:name, :code, :total_members)
+    params.require(:department).permit(:name, :code, :total_members)
   end
 
   def set_department

@@ -28,7 +28,7 @@ class TithesController < ApplicationController
   private
 
   def tithe_params
-    params.permit(:name, :amount, :tithe_date, :contacts, :member)
+    params.require(:tithe).permit(:name, :amount, :tithe_date, :contacts, :member)
   end
 
   def set_tithe
