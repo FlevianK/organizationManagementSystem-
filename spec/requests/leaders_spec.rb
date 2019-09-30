@@ -61,9 +61,9 @@ RSpec.describe 'Leaders API' do
     end
   end
 
-  # Test suite for PUT /members/:member_id/leaders
-  describe 'POST /members/:member_id/members' do
-    let(:valid_attributes) { { title: 'chairperson', department: 'usher' } }
+  # Test suite for POST /members/:member_id/leaders
+  describe 'POST /members/:member_id/leaders' do
+    let(:valid_attributes) { { leader: { title: 'chairperson', department: 'usher' } } }
 
     context 'when request attributes are valid' do
       before { post "/members/#{member_id}/leaders", params: valid_attributes }
@@ -74,21 +74,21 @@ RSpec.describe 'Leaders API' do
     end
 
     context 'when an invalid request' do
-      before { post "/members/#{member_id}/leaders", params: {} }
+      before { post "/members/#{member_id}/leaders", params: { leader: {title: 'treasurer'} } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
       end
 
       it 'returns a failure message' do
-        expect(response.body).to match(/Validation failed: Title can't be blank, Department can't be blank/)
+        expect(response.body).to match(/Validation failed: Department can't be blank/)
       end
     end
   end
 
   # Test suite for PUT /members/:member_id/leaders/:id
   describe 'PUT /members/:member_id/leaders/:id' do
-    let(:valid_attributes) { { title: 'Treasure' } }
+    let(:valid_attributes) { { leader: { title: 'Treasure' } } }
 
     before { put "/members/#{member_id}/leaders/#{id}", params: valid_attributes }
 

@@ -49,7 +49,7 @@ RSpec.describe 'Members API', type: :request do
   # Test suite for POST /members
   describe 'POST /members' do
     # valid payload
-    let(:valid_attributes) { { name: 'Praise Mary', contacts: '373', residence: 'Mirema', join_date: 'Fri, 19 Sep 2014', born_again: false, spirit_filled: false, departments: 'asher' } }
+    let(:valid_attributes) { { member: { name: 'Praise Mary', contacts: '373', residence: 'Mirema', join_date: 'Fri, 19 Sep 2014', born_again: false, spirit_filled: false, departments: 'asher' } } }
 
     context 'when the request is valid' do
       
@@ -65,7 +65,7 @@ RSpec.describe 'Members API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/members', params: { name: 'Praise Pearl' } }
+      before { post '/members', params: { member: { name: 'Praise Pearl' } } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -80,7 +80,7 @@ RSpec.describe 'Members API', type: :request do
 
   # Test suite for PUT /members/:id
   describe 'PUT /mebers/:id' do
-    let(:valid_attributes) { { name: 'Praise Grace' } }
+    let(:valid_attributes) { { member: { name: 'Praise Grace' } } }
 
     context 'when the record exists' do
       before { put "/members/#{member_id}", params: valid_attributes }

@@ -49,7 +49,7 @@ RSpec.describe 'Events API', type: :request do
   # Test suite for POST /events
   describe 'POST /events' do
     # valid payload
-    let(:valid_attributes) { { department: 'Usher', event_date: 'Fri, 19 Sep 2020', event_name: 'youth  worship night', event_description: 'Heaven on earth experience night', event_guest:'Rose', event_venue: 'CMM' } }
+    let(:valid_attributes) { { event: { department: 'Usher', event_date: 'Fri, 19 Sep 2020', event_name: 'youth  worship night', event_description: 'Heaven on earth experience night', event_guest:'Rose', event_venue: 'CMM' } } }
 
     context 'when the request is valid' do
       
@@ -65,7 +65,7 @@ RSpec.describe 'Events API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/events', params: { department: 'Praise' } }
+      before { post '/events', params: { event: { department: 'Praise' } } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -80,7 +80,7 @@ RSpec.describe 'Events API', type: :request do
 
   # Test suite for PUT /events/:id
   describe 'PUT /events/:id' do
-    let(:valid_attributes) { { Department: 'Praise' } }
+    let(:valid_attributes) { { event:  { Department: 'Praise' } } }
 
     context 'when the record exists' do
       before { put "/events/#{event_id}", params: valid_attributes }

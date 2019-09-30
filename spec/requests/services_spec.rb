@@ -49,7 +49,7 @@ RSpec.describe 'Services API', type: :request do
   # Test suite for POST /services
   describe 'POST /services' do
     # valid payload
-    let(:valid_attributes) { { service_date: 'Fri, 19 Sep 2020', total_new_converts: 34, total_attendants: 100, sunday_school_teachers:'Rose, CMM' } }
+    let(:valid_attributes) { { service: { service_date: 'Fri, 19 Sep 2020', total_new_converts: 34, total_attendants: 100, sunday_school_teachers:'Rose, CMM' } } }
 
     context 'when the request is valid' do
       
@@ -65,7 +65,7 @@ RSpec.describe 'Services API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/services', params: { total_new_converts: 50 } }
+      before { post '/services', params: {  service: { total_new_converts: 50 } } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -80,7 +80,7 @@ RSpec.describe 'Services API', type: :request do
 
   # Test suite for PUT /services/:id
   describe 'PUT /services/:id' do
-    let(:valid_attributes) { { total_new_converts: 20 } }
+    let(:valid_attributes) { {  service: { total_new_converts: 20 } } }
 
     context 'when the record exists' do
       before { put "/services/#{service_id}", params: valid_attributes }

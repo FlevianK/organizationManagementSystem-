@@ -49,7 +49,7 @@ RSpec.describe 'Tithes API', type: :request do
   # Test suite for POST /tithes
   describe 'POST /tithes' do
     # valid payload
-    let(:valid_attributes) { { name: 'Grace Joy', amount: 100, tithe_date: 'Fri, 19 Sep 2014', member: true, contacts: '2453' } }
+    let(:valid_attributes) { { tithe: { name: 'Grace Joy', amount: 100, tithe_date: 'Fri, 19 Sep 2014', member: true, contacts: '2453' } } }
 
     context 'when the request is valid' do
       
@@ -65,7 +65,7 @@ RSpec.describe 'Tithes API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/tithes', params: { name: 'Jb k' } }
+      before { post '/tithes', params: { tithe: { name: 'Jb k' } } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -80,7 +80,7 @@ RSpec.describe 'Tithes API', type: :request do
 
   # Test suite for PUT /tithes/:id
   describe 'PUT /tithes/:id' do
-    let(:valid_attributes) { { total_new_converts: 20 } }
+    let(:valid_attributes) { { tithe: { total_new_converts: 20 } } }
 
     context 'when the record exists' do
       before { put "/tithes/#{tithe_id}", params: valid_attributes }

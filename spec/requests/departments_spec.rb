@@ -49,7 +49,7 @@ RSpec.describe 'Departments API', type: :request do
   # Test suite for POST /departments
   describe 'POST /departments' do
     # valid payload
-    let(:valid_attributes) { { name: 'Usher', code: '373', total_members: 40 } }
+    let(:valid_attributes) { { department: { name: 'Usher', code: '373', total_members: 40 } } }
 
     context 'when the request is valid' do
       
@@ -65,7 +65,7 @@ RSpec.describe 'Departments API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/departments', params: { name: 'Praise' } }
+      before { post '/departments', params: { department: { name: 'Praise' } } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -80,7 +80,7 @@ RSpec.describe 'Departments API', type: :request do
 
   # Test suite for PUT /departments/:id
   describe 'PUT /departments/:id' do
-    let(:valid_attributes) { { name: 'Praise' } }
+    let(:valid_attributes) { { department: { name: 'Praise' } } }
 
     context 'when the record exists' do
       before { put "/departments/#{department_id}", params: valid_attributes }
