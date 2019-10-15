@@ -3,9 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Services API', type: :request do 
   let!(:services) { create_list(:service, 10) }
   let(:service_id) { services.first.id }
+  # authorize request
+  let(:user) { create(:user) }
+  let(:headers) { valid_headers }
 
   describe 'GET /services' do
-    before { get '/services' }
+    before { get '/services', headers: headers }
 
     it 'returns services' do
       # Note `json` is a custom helper to parse JSON responses
@@ -20,7 +23,7 @@ RSpec.describe 'Services API', type: :request do
 
   # Test suite for GET /services/:id
   describe 'GET /services/:id' do
-    before { get "/services/#{service_id}" }
+    before { get "/services/#{service_id}", headers: headers }
 
     context 'when the record exists' do
       it 'returns the service' do
@@ -53,7 +56,7 @@ RSpec.describe 'Services API', type: :request do
 
     context 'when the request is valid' do
       
-      before { post '/services', params: valid_attributes }
+      before { post '/services', params: valid_attributes, headers: headers }
 
       it 'creates a service' do
         expect(json['total_new_converts']).to eq(34)
@@ -65,7 +68,7 @@ RSpec.describe 'Services API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/services', params: {  service: { total_new_converts: 50 } } }
+      before { post '/services', params: {  service: { total_new_converts: 50 } }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -83,7 +86,7 @@ RSpec.describe 'Services API', type: :request do
     let(:valid_attributes) { {  service: { total_new_converts: 20 } } }
 
     context 'when the record exists' do
-      before { put "/services/#{service_id}", params: valid_attributes }
+      before { put "/services/#{service_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -97,7 +100,7 @@ RSpec.describe 'Services API', type: :request do
 
   # Test suite for DELETE /services/:id
   describe 'DELETE /services/:id' do
-    before { delete "/services/#{service_id}" }
+    before { delete "/services/#{service_id}", headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

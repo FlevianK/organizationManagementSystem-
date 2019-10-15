@@ -3,9 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Tithes API', type: :request do 
   let!(:tithes) { create_list(:tithe, 10) }
   let(:tithe_id) { tithes.first.id }
+  # authorize request
+  let(:user) { create(:user) }
+  let(:headers) { valid_headers }
 
   describe 'GET /tithes' do
-    before { get '/tithes' }
+    before { get '/tithes', headers: headers }
 
     it 'returns tithes' do
       # Note `json` is a custom helper to parse JSON responses
@@ -20,7 +23,7 @@ RSpec.describe 'Tithes API', type: :request do
 
   # Test suite for GET /tithes/:id
   describe 'GET /tithes/:id' do
-    before { get "/tithes/#{tithe_id}" }
+    before { get "/tithes/#{tithe_id}",  headers: headers }
 
     context 'when the record exists' do
       it 'returns the tithe' do
@@ -53,7 +56,7 @@ RSpec.describe 'Tithes API', type: :request do
 
     context 'when the request is valid' do
       
-      before { post '/tithes', params: valid_attributes }
+      before { post '/tithes', params: valid_attributes,  headers: headers }
 
       it 'creates a tithe' do
         expect(json['name']).to eq('Grace Joy')
@@ -65,7 +68,7 @@ RSpec.describe 'Tithes API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/tithes', params: { tithe: { name: 'Jb k' } } }
+      before { post '/tithes', params: { tithe: { name: 'Jb k' } }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -83,7 +86,7 @@ RSpec.describe 'Tithes API', type: :request do
     let(:valid_attributes) { { tithe: { total_new_converts: 20 } } }
 
     context 'when the record exists' do
-      before { put "/tithes/#{tithe_id}", params: valid_attributes }
+      before { put "/tithes/#{tithe_id}", params: valid_attributes,  headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -97,7 +100,7 @@ RSpec.describe 'Tithes API', type: :request do
 
   # Test suite for DELETE /tithes/:id
   describe 'DELETE /tithes/:id' do
-    before { delete "/tithes/#{tithe_id}" }
+    before { delete "/tithes/#{tithe_id}",  headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

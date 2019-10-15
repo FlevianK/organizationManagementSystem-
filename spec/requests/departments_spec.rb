@@ -3,9 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Departments API', type: :request do 
   let!(:departments) { create_list(:department, 10) }
   let(:department_id) { departments.first.id }
+  # authorize request
+  let(:user) { create(:user) }
+  let(:headers) { valid_headers }
 
   describe 'GET /departments' do
-    before { get '/departments' }
+    before { get '/departments', headers: headers }
 
     it 'returns departments' do
       # Note `json` is a custom helper to parse JSON responses
@@ -20,7 +23,7 @@ RSpec.describe 'Departments API', type: :request do
 
   # Test suite for GET /departments/:id
   describe 'GET /departments/:id' do
-    before { get "/departments/#{department_id}" }
+    before { get "/departments/#{department_id}", headers: headers}
 
     context 'when the record exists' do
       it 'returns the department' do
@@ -53,7 +56,7 @@ RSpec.describe 'Departments API', type: :request do
 
     context 'when the request is valid' do
       
-      before { post '/departments', params: valid_attributes }
+      before { post '/departments', params: valid_attributes, headers: headers }
 
       it 'creates a department' do
         expect(json['name']).to eq('Usher')
@@ -65,7 +68,7 @@ RSpec.describe 'Departments API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/departments', params: { department: { name: 'Praise' } } }
+      before { post '/departments', params: { department: { name: 'Praise' } }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -83,7 +86,7 @@ RSpec.describe 'Departments API', type: :request do
     let(:valid_attributes) { { department: { name: 'Praise' } } }
 
     context 'when the record exists' do
-      before { put "/departments/#{department_id}", params: valid_attributes }
+      before { put "/departments/#{department_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -97,7 +100,7 @@ RSpec.describe 'Departments API', type: :request do
 
   # Test suite for DELETE /departments/:id
   describe 'DELETE /departments/:id' do
-    before { delete "/departments/#{department_id}" }
+    before { delete "/departments/#{department_id}", headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

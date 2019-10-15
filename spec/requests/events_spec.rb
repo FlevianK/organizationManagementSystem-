@@ -4,8 +4,12 @@ RSpec.describe 'Events API', type: :request do
   let!(:events) { create_list(:event, 10) }
   let(:event_id) { events.first.id }
 
+  # authorize request
+  let(:user) { create(:user) }
+  let(:headers) { valid_headers }
+
   describe 'GET /events' do
-    before { get '/events' }
+    before { get '/events', headers: headers }
 
     it 'returns events' do
       # Note `json` is a custom helper to parse JSON responses
@@ -20,7 +24,7 @@ RSpec.describe 'Events API', type: :request do
 
   # Test suite for GET /events/:id
   describe 'GET /events/:id' do
-    before { get "/events/#{event_id}" }
+    before { get "/events/#{event_id}", headers: headers }
 
     context 'when the record exists' do
       it 'returns the event' do
@@ -53,7 +57,7 @@ RSpec.describe 'Events API', type: :request do
 
     context 'when the request is valid' do
       
-      before { post '/events', params: valid_attributes }
+      before { post '/events', params: valid_attributes, headers: headers }
 
       it 'creates a event' do
         expect(json['department']).to eq('Usher')
@@ -65,7 +69,7 @@ RSpec.describe 'Events API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/events', params: { event: { department: 'Praise' } } }
+      before { post '/events', params: { event: { department: 'Praise' } }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -83,7 +87,7 @@ RSpec.describe 'Events API', type: :request do
     let(:valid_attributes) { { event:  { Department: 'Praise' } } }
 
     context 'when the record exists' do
-      before { put "/events/#{event_id}", params: valid_attributes }
+      before { put "/events/#{event_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -97,7 +101,7 @@ RSpec.describe 'Events API', type: :request do
 
   # Test suite for DELETE /events/:id
   describe 'DELETE /events/:id' do
-    before { delete "/events/#{event_id}" }
+    before { delete "/events/#{event_id}", headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

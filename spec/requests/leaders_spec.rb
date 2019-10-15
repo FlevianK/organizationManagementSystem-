@@ -6,10 +6,13 @@ RSpec.describe 'Leaders API' do
   let!(:leaders) { create_list(:leader, 20, member_id: member.id) }
   let(:member_id) { member.id }
   let(:id) { leaders.first.id }
+  # authorize request
+  let(:user) { create(:user) }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /members/:member_id/leaders
   describe 'GET /members/:member_id/leaders' do
-    before { get "/members/#{member_id}/leaders" }
+    before { get "/members/#{member_id}/leaders", headers: headers }
 
     context 'when member exists' do
       it 'returns status code 200' do
@@ -36,7 +39,7 @@ RSpec.describe 'Leaders API' do
 
   # Test suite for GET /members/:member_id/leaders/:id
   describe 'GET /members/:member_id/leaders/:id' do
-    before { get "/members/#{member_id}/leaders/#{id}" }
+    before { get "/members/#{member_id}/leaders/#{id}", headers: headers }
 
     context 'when member who is a leader exists' do
       it 'returns status code 200' do
@@ -66,7 +69,7 @@ RSpec.describe 'Leaders API' do
     let(:valid_attributes) { { leader: { title: 'chairperson', department: 'usher' } } }
 
     context 'when request attributes are valid' do
-      before { post "/members/#{member_id}/leaders", params: valid_attributes }
+      before { post "/members/#{member_id}/leaders", params: valid_attributes, headers: headers }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -74,7 +77,7 @@ RSpec.describe 'Leaders API' do
     end
 
     context 'when an invalid request' do
-      before { post "/members/#{member_id}/leaders", params: { leader: {title: 'treasurer'} } }
+      before { post "/members/#{member_id}/leaders", params: { leader: {title: 'treasurer'} }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -90,7 +93,7 @@ RSpec.describe 'Leaders API' do
   describe 'PUT /members/:member_id/leaders/:id' do
     let(:valid_attributes) { { leader: { title: 'Treasure' } } }
 
-    before { put "/members/#{member_id}/leaders/#{id}", params: valid_attributes }
+    before { put "/members/#{member_id}/leaders/#{id}", params: valid_attributes, headers: headers }
 
     context 'when the specific leader role for a member exists' do
       it 'returns status code 204' do
@@ -118,7 +121,7 @@ RSpec.describe 'Leaders API' do
 
   # Test suite for DELETE /members/:id
   describe 'DELETE /members/:id' do
-    before { delete "/members/#{member_id}/leaders/#{id}" }
+    before { delete "/members/#{member_id}/leaders/#{id}", headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

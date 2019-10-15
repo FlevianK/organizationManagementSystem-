@@ -3,9 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Members API', type: :request do 
   let!(:members) { create_list(:member, 10) }
   let(:member_id) { members.first.id }
+  # authorize request
+  let(:user) { create(:user) }
+  let(:headers) { valid_headers }
 
   describe 'GET /members' do
-    before { get '/members' }
+    before { get '/members', headers: headers }
 
     it 'returns members' do
       # Note `json` is a custom helper to parse JSON responses
@@ -20,7 +23,7 @@ RSpec.describe 'Members API', type: :request do
 
   # Test suite for GET /members/:id
   describe 'GET /members/:id' do
-    before { get "/members/#{member_id}" }
+    before { get "/members/#{member_id}", headers: headers }
 
     context 'when the record exists' do
       it 'returns the member' do
@@ -53,7 +56,7 @@ RSpec.describe 'Members API', type: :request do
 
     context 'when the request is valid' do
       
-      before { post '/members', params: valid_attributes }
+      before { post '/members', params: valid_attributes, headers: headers }
 
       it 'creates a member' do
         expect(json['name']).to eq('Praise Mary')
@@ -65,7 +68,7 @@ RSpec.describe 'Members API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/members', params: { member: { name: 'Praise Pearl' } } }
+      before { post '/members', params: { member: { name: 'Praise Pearl' } }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -83,7 +86,7 @@ RSpec.describe 'Members API', type: :request do
     let(:valid_attributes) { { member: { name: 'Praise Grace' } } }
 
     context 'when the record exists' do
-      before { put "/members/#{member_id}", params: valid_attributes }
+      before { put "/members/#{member_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -97,7 +100,7 @@ RSpec.describe 'Members API', type: :request do
 
   # Test suite for DELETE /members/:id
   describe 'DELETE /members/:id' do
-    before { delete "/members/#{member_id}" }
+    before { delete "/members/#{member_id}", headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
