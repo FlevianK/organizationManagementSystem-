@@ -17,6 +17,7 @@ gem 'puma', '~> 3.11'
 gem 'bcrypt', '~> 3.1.7'
 # Use JWT to manage JSON web tokens
 gem 'jwt'
+gem 'active_model_serializers', '~> 0.10.0'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
