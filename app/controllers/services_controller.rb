@@ -2,7 +2,7 @@ class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :update, :destroy]
 
   def index
-    @services = Service.all
+    @services = Service.paginate(page: params[:page], per_page: 20)
     json_response(@services)
   end
 

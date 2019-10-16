@@ -2,7 +2,7 @@ class DepartmentsController < ApplicationController
   before_action :set_department, only: [:show, :update, :destroy]
 
   def index
-    @departments = Department.all
+    @departments = Department.paginate(page: params[:page], per_page: 20)
     json_response(@departments)
   end
 

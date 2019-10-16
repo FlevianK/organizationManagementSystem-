@@ -2,7 +2,7 @@ class TithesController < ApplicationController
   before_action :set_tithe, only: [:show, :update, :destroy]
 
   def index
-    @tithes = Tithe.all
+    @tithes = Tithe.paginate(page: params[:page], per_page: 20)
     json_response(@tithes)
   end
 

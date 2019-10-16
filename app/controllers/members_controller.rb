@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   before_action :set_member, only: [:show, :update, :destroy]
 
   def index
-    @members = Member.all
+    @members = Member.paginate(page: params[:page], per_page: 20)
     json_response(@members)
   end
 
