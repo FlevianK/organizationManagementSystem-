@@ -4,8 +4,8 @@ FactoryBot.define do
     contacts { Faker::Number.digit }
     residence { Faker::Name.name }
     join_date { Faker::Date.backward(1000) }
-    born_again true
-    spirit_filled true
+    born_again { true }
+    spirit_filled { true }
     departments  { Faker::Lorem.word }
   end
 end

@@ -4,6 +4,6 @@ FactoryBot.define do
     contacts { Faker::Number.digit }
     amount { Faker::Number.number }
     tithe_date { Faker::Date.backward(360) }
-    member true
+    member { true }
   end
 end
