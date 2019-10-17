@@ -20,6 +20,7 @@ gem 'jwt'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'will_paginate', '~> 3.1.0'
 gem 'faker'
+gem 'figaro'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -50,7 +51,7 @@ group :test do
   gem 'factory_bot_rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker'
-  gem 'database_cleaner'
+  gem 'database_cleaner' 
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
