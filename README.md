@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/FlevianK/organizationManagementSystem-.svg?branch=develop)](https://travis-ci.org/FlevianK/organizationManagementSystem-)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
