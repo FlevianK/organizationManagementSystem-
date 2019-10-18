@@ -5,9 +5,9 @@ RSpec.describe 'Authentication', type: :request do
   describe 'POST /auth/login' do
     let!(:user) { create(:user) }
     let(:headers) { valid_headers.except('Authorization') }
-    let(:valid_credentials) { { email: user.email, password: user.password } }
+    let(:valid_credentials) { { credentials: { email: user.email, password: user.password } } }
     
-    let(:invalid_credentials) { { email: Faker::Internet.email, password: Faker::Internet.password } }
+    let(:invalid_credentials) { { credentials: { email: Faker::Internet.email, password: Faker::Internet.password } } }
     
     context 'When request is valid' do
       before { post '/auth/login', params: valid_credentials, headers: headers }
