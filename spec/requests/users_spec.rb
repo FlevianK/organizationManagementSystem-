@@ -7,11 +7,12 @@ RSpec.describe 'Users API', type: :request do
   let(:valid_attributes)  { { user: { email: user.email, name: user.name, password: user.password, password_confirmation: user.password } } }
   let(:user) { create(:user) }
   let(:headers) { valid_headers }
+  let(:headers_authorization) { valid_headers.except('Authorization') }
 
   # User signup test suite
   describe 'POST /signup' do
     context 'when valid request' do
-      before { post '/signup', params: valid_attributes, headers: headers }
+      before { post '/signup', params: valid_attributes, headers: headers_authorization }
 
       it 'creates a new user' do
         expect(response).to have_http_status(201)
