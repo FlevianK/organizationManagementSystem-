@@ -4,7 +4,6 @@ rvm:
 services:
   - postgresql
 before_script:
-  - psql -c "drop database if exists org-ms-test;" -U postgres
   - psql -c 'create database org-ms-test;' -U postgres
 before_install:
   - gem update --system
