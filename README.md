@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/FlevianK/organizationManagementSystem-.svg?branch=develop)](https://travis-ci.org/FlevianK/organizationManagementSystem-)
+[![Coverage Status](https://coveralls.io/repos/github/FlevianK/organizationManagementSystem-/badge.svg?branch=develop)](https://coveralls.io/github/FlevianK/organizationManagementSystem-?branch=develop)
 
 # README
 
