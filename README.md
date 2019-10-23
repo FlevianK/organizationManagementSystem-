@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/FlevianK/organizationManagementSystem-.svg?branch=develop)](https://travis-ci.org/FlevianK/organizationManagementSystem-)
 [![Coverage Status](https://coveralls.io/repos/github/FlevianK/organizationManagementSystem-/badge.svg?branch=develop)](https://coveralls.io/github/FlevianK/organizationManagementSystem-?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d90e0f308dca4ed4cb90/maintainability)](https://codeclimate.com/github/rails/rails/maintainability)
 
 # README
 
